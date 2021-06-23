@@ -26,6 +26,11 @@ class oligarch extends Humen{
       deputy.voiting(law, status);
    }
 }
+class Polismen extends Humen {
+    constructor(params) {
+        super()
+    }
+}
 class Deputy extends Humen {
     constructor(name, surname, ages, desk) {
        super(name, surname, ages);
@@ -130,7 +135,7 @@ vira.voiting("Rabesh", false);
 
 //даємо хабарі
 taras.getBribe(150);
-ahmetow.giveBrive(1000, taras, "Rabesh", true);
+ahmetow.giveBrive(150, taras, "Rabesh", true);
 
 
 //дивимось стату депутата
@@ -144,3 +149,4 @@ statusLaw("Language");
 
 //перевіряємо як проголосував депутат за даний законопроект
 taras.abouVoiting("Rabesh");
+console.log(council);
