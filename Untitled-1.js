@@ -26,10 +26,19 @@ class oligarch extends Humen{
       deputy.voiting(law, status);
    }
 }
-class Polismen extends Humen {
-    constructor(params) {
-        super()
-    }
+class Polisman extends Humen {
+    constructor(name, surname, ages) {
+       super(name, surname, ages);
+       this.prison = new Map();
+   }
+   catsh(deputy) {
+      let status = deputy.getBriveStatus();
+      if (status[1] > 1000) {
+         this.prison.set(deputy.name, "prisoner");
+         deputy.status = "prisoner";
+      }
+
+   }
 }
 class Deputy extends Humen {
     constructor(name, surname, ages, desk) {
@@ -49,19 +58,23 @@ class Deputy extends Humen {
       }
    }
    getBriveStatus() {
-      console.log([this.status, this.bribeSum]);
+      return ([this.status, this.bribeSum]);
    }
    addLaw(number, title) {
-      if (getLawList().indexOf(title) < 0) {
+      if (getLawList().indexOf(title) < 0 && this.status != "prisoner") {
          this.lawList.set(number , title);
+      } else if (this.status === "prisoner") {
+         console.log("Хабарники не можуть додавати свої закони");
       } else{
-         console.log("Законопроект вже зареєстрованийі");
+         console.log("Законопроект вже зареєстрований");
       }
    }
    voiting(law, voise) {
       let list = getLawList();
-      if (list.indexOf(law) >= 0 && typeof(voise) === "boolean") {
+      if (list.indexOf(law) >= 0 && typeof(voise) === "boolean" && this.status != "prisoner") {
          this.voitinging.set(law,voise);
+      } else if (this.status === "prisoner") {
+         console.log("Хабарники не можуть голосувати");
       } else {
          console.log("Закону не існує, або ви не коректно проголосували");
       } 
@@ -121,6 +134,9 @@ let vira = addDeputyInCouncil("Vira", "Lutsyk", 32, "Byut");
 let ahmetow = new oligarch("Ahmed","Bubabua", 38, 100000);
 console.log(ahmetow);
 
+//створюємо поліцейського
+let polisman = new Polisman("Slava", "Cetcher", 32);
+
 // додаємо законопроекти
 taras.addLaw(1, "Language");
 taras.addLaw(2, "Water");
@@ -135,8 +151,9 @@ vira.voiting("Rabesh", false);
 
 //даємо хабарі
 taras.getBribe(150);
-ahmetow.giveBrive(150, taras, "Rabesh", true);
+ahmetow.giveBrive(1500, taras, "Rabesh", true);
 
+polisman.catsh(taras);
 
 //дивимось стату депутата
 taras.getBriveStatus();
