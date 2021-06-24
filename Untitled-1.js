@@ -15,7 +15,7 @@ class Humen {
        this.ages = ages;
    }
 }
-class oligarch extends Humen{
+class Oligarch extends Humen{
     constructor(name, surname, ages, money) {
        super(name, surname, ages);
        this.money = money;
@@ -131,7 +131,7 @@ let nazar = addDeputyInCouncil("Nazar", "Lutsyk", 22, "Frydom");
 let vira = addDeputyInCouncil("Vira", "Lutsyk", 32, "Byut");
 
 //створення олігарха
-let ahmetow = new oligarch("Ahmed","Bubabua", 38, 100000);
+let ahmetow = new Oligarch("Ahmed","Bubabua", 38, 100000);
 console.log(ahmetow);
 
 //створюємо поліцейського

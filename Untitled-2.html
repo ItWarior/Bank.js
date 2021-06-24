@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta content="width=device-width, initial-scale=1.0">
    <title>Document</title>
+   <link rel="stylesheet" href="style.css">
 </head>
-<body> 
-   <form name = ""></form>
+
+<body>
+   <div id="createBlock">
+      <h3>Створення депутатів</h3>
+      <form name="deputy">
+         <input type="text" name="name" placeholder="name">
+         <input type="text" name="surname" placeholder="surname">
+         <input type="number" name="ages" placeholder="ages">
+         <input type="text" name="desk" placeholder="desk">
+         <input type="button" value="create" name="addDeputy">
+      </form>
+      <h3>Створення олігархів</h3>
+      <form name="oligarch">
+         <input type="text" name="name" placeholder="name">
+         <input type="text" name="surname" placeholder="surname">
+         <input type="number" name="ages" placeholder="ages">
+         <input type="text" name="money" placeholder="money">
+         <input type="button" value="create" name="addOligarch">
+      </form>
+      <h3>Створення поліцейських</h3>
+      <form name="polisman">
+         <input type="text" name="name" placeholder="name">
+         <input type="text" name="surname" placeholder="surname">
+         <input type="number" name="ages" placeholder="ages">
+         <input type="button" value="create" name="addPoliceman">
+      </form>
+      <div id = "deputyBlock">
+         <h1>
+            Депутати верховної ради
+         </h1>
+      </div>
+   </div>
+   <script src="Dom.js"></script>
    <script src="Untitled-1.js"></script>
 </body>
+
 </html>
