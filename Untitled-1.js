@@ -60,9 +60,12 @@ class Deputy extends Humen {
    getBriveStatus() {
       return ([this.status, this.bribeSum]);
    }
-   addLaw(number, title) {
-      if (getLawList().indexOf(title) < 0 && this.status != "prisoner") {
-         this.lawList.set(number , title);
+   addLawF(number, title) {
+      let ifa = getLawList().indexOf(title);
+      if (ifa < 0 && this.status != "prisoner") {
+         this.lawList.set(number, title);
+         addLawInBlock(title);
+         console.log("ви успішно зареєстрували законопроект");
       } else if (this.status === "prisoner") {
          console.log("Хабарники не можуть додавати свої закони");
       } else{
@@ -72,7 +75,8 @@ class Deputy extends Humen {
    voiting(law, voise) {
       let list = getLawList();
       if (list.indexOf(law) >= 0 && typeof(voise) === "boolean" && this.status != "prisoner") {
-         this.voitinging.set(law,voise);
+         this.voitinging.set(law, voise);
+         console.log("Вітаємо ваш голос зарахований");
       } else if (this.status === "prisoner") {
          console.log("Хабарники не можуть голосувати");
       } else {
@@ -80,8 +84,20 @@ class Deputy extends Humen {
       } 
    }
    abouVoiting(law) {
-      if (this.voitinging.has(law)) {
-         console.log(this.voitinging.get(law));
+      let list = getLawList();
+      if (list.indexOf(law) >= 0) {         
+         list.forEach(element => {
+            if (element === law) {
+               if (this.voitinging.has(law)) {
+                  console.log(this.voitinging.get(law));
+               }
+               else {
+                  console.log("Утримався");
+               }
+            } 
+         });
+      }else {
+         console.log("Законопроекту не існеє");
       }
    }
 }
@@ -111,9 +127,7 @@ function statusLaw(law) {
             notvoit++;
          }
       }
-      console.log(`Say yes : ${yes}`);
-      console.log(`Say no : ${no}`);
-      console.log(`Say I don't no : ${notvoit}`);
+      return [yes, no, notvoit];
    } else {
       console.log("Законопроект не зареєстрований");
    }
@@ -124,46 +138,3 @@ function addDeputyInCouncil(name,surname,ages,desk) {
    council.push(deputy);
    return deputy;
 }
-// Додаємо депутатів
-let taras = addDeputyInCouncil("Taras", "Lutsyk", 29, "Frydom");
-let ivan = addDeputyInCouncil("Ivan", "Lutsyk", 50, "Dom");
-let nazar = addDeputyInCouncil("Nazar", "Lutsyk", 22, "Frydom");
-let vira = addDeputyInCouncil("Vira", "Lutsyk", 32, "Byut");
-
-//створення олігарха
-let ahmetow = new Oligarch("Ahmed","Bubabua", 38, 100000);
-console.log(ahmetow);
-
-//створюємо поліцейського
-let polisman = new Polisman("Slava", "Cetcher", 32);
-
-// додаємо законопроекти
-taras.addLaw(1, "Language");
-taras.addLaw(2, "Water");
-ivan.addLaw(1, "Rabesh");
-
-// голосуємо за законопроекти
-taras.voiting("Language", true);
-nazar.voiting("Language", true);
-ivan.voiting("Language", true);
-vira.voiting("Language", false);
-vira.voiting("Rabesh", false);
-
-//даємо хабарі
-taras.getBribe(150);
-ahmetow.giveBrive(1500, taras, "Rabesh", true);
-
-polisman.catsh(taras);
-
-//дивимось стату депутата
-taras.getBriveStatus();
-
-// виводимо в консоль всі зареєстровані законопроекти
-console.log(getLawList());
-
-//перевіряємо як проголосували депутати
-statusLaw("Language");
-
-//перевіряємо як проголосував депутат за даний законопроект
-taras.abouVoiting("Rabesh");
-console.log(council);

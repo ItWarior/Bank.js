@@ -1,0 +1,49 @@
+body{
+   margin: 0;
+   box-sizing: border-box;
+}
+#lawList{
+   display: flex;
+   flex-wrap: wrap;
+}
+.blockLaw{
+   width: 200px;
+   border: 3px solid green;
+   background-color: #e6d0c8;
+}
+#deputyBlock{
+   display: flex;
+   flex-wrap: wrap;
+}
+.deputyH{
+   margin: 0;
+}
+.deputy{
+   margin: 20px;
+   padding: 10px;
+   border-radius: 5%;
+   border: 2px solid black;
+   width: 250px;
+   height: 250px;
+   background-color: rgb(152, 97, 168);
+}
+.imgDeputy{
+   width: 100px;
+   height: 100px;
+   border: 2px solid black;
+   padding: 3px;
+}
+.bclockBtn{
+   display: flex;
+    float: right;
+    flex-direction: column;
+    width: 120px;
+}
+.btn{
+   margin: 5px;
+   width: 100px;
+   height: 20px;
+}
+.lawFormInp{
+   margin: 2px;
+}
