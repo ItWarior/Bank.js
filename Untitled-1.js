@@ -9,27 +9,31 @@
 // хто які закони видавав
 // голосування
 class Humen {
-    constructor(name, surname, ages) {
-       this.name = name;
-       this.surname = surname;
-       this.ages = ages;
+   constructor(name, surname, ages) {
+      this.name = name;
+      this.surname = surname;
+      this.ages = ages;
    }
 }
-class Oligarch extends Humen{
-    constructor(name, surname, ages, money) {
-       super(name, surname, ages);
-       this.money = money;
+class Oligarch extends Humen {
+   constructor(name, surname, ages, money) {
+      super(name, surname, ages);
+      this.money = money;
    }
    giveBrive(sum, deputy, law, status) {
       this.money = this.money - sum;
       deputy.getBribe(sum);
-      deputy.voiting(law, status);
+      if (sum > 100) {
+         deputy.voiting(law, status);
+      } else {
+         "Треба більше грошей"
+      }
    }
 }
 class Polisman extends Humen {
-    constructor(name, surname, ages) {
-       super(name, surname, ages);
-       this.prison = new Map();
+   constructor(name, surname, ages) {
+      super(name, surname, ages);
+      this.prison = new Map();
    }
    catsh(deputy) {
       let status = deputy.getBriveStatus();
@@ -41,13 +45,13 @@ class Polisman extends Humen {
    }
 }
 class Deputy extends Humen {
-    constructor(name, surname, ages, desk) {
-       super(name, surname, ages);
-       this.desk = desk;
-       this.status = false;
-       this.bribeSum = 0;
-       this.lawList = new Map();
-       this.voitinging = new Map();
+   constructor(name, surname, ages, desk) {
+      super(name, surname, ages);
+      this.desk = desk;
+      this.status = false;
+      this.bribeSum = 0;
+      this.lawList = new Map();
+      this.voitinging = new Map();
    }
    getBribe(sum) {
       if (sum >= 100) {
@@ -68,24 +72,24 @@ class Deputy extends Humen {
          console.log("ви успішно зареєстрували законопроект");
       } else if (this.status === "prisoner") {
          console.log("Хабарники не можуть додавати свої закони");
-      } else{
+      } else {
          console.log("Законопроект вже зареєстрований");
       }
    }
    voiting(law, voise) {
       let list = getLawList();
-      if (list.indexOf(law) >= 0 && typeof(voise) === "boolean" && this.status != "prisoner") {
+      if (list.indexOf(law) >= 0 && typeof (voise) === "boolean" && this.status != "prisoner") {
          this.voitinging.set(law, voise);
          console.log("Вітаємо ваш голос зарахований");
       } else if (this.status === "prisoner") {
          console.log("Хабарники не можуть голосувати");
       } else {
          console.log("Закону не існує, або ви не коректно проголосували");
-      } 
+      }
    }
    abouVoiting(law) {
       let list = getLawList();
-      if (list.indexOf(law) >= 0) {         
+      if (list.indexOf(law) >= 0) {
          list.forEach(element => {
             if (element === law) {
                if (this.voitinging.has(law)) {
@@ -94,9 +98,9 @@ class Deputy extends Humen {
                else {
                   console.log("Утримався");
                }
-            } 
+            }
          });
-      }else {
+      } else {
          console.log("Законопроекту не існеє");
       }
    }
@@ -107,9 +111,9 @@ let council = [];
 // повертає масив законопроектів
 function getLawList() {
    let list = [];
-      council.forEach(deputy => {
-          list = list.concat([...deputy.lawList.values()]);
-      });
+   council.forEach(deputy => {
+      list = list.concat([...deputy.lawList.values()]);
+   });
    return list;
 }
 // виводить в консоль кількість голосів за даний законопроект
@@ -133,7 +137,7 @@ function statusLaw(law) {
    }
 }
 //створення нового депутата, повертає обєкт дупутат
-function addDeputyInCouncil(name,surname,ages,desk) {
+function addDeputyInCouncil(name, surname, ages, desk) {
    let deputy = new Deputy(name, surname, ages, desk);
    council.push(deputy);
    return deputy;

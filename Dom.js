@@ -1,9 +1,4 @@
-// // Додаємо депутатів
-// let taras = addDeputyInCouncil("Taras", "Lutsyk", 29, "Frydom");
-// let ivan = addDeputyInCouncil("Ivan", "Lutsyk", 50, "Dom");
-// let nazar = addDeputyInCouncil("Nazar", "Lutsyk", 22, "Frydom");
-// let vira = addDeputyInCouncil("Vira", "Lutsyk", 32, "Byut");
-
+let masOligarch = [];
 // дістаємо першу форму з дупутатами
 let deputyForm = document.forms.deputy;
 let deputyName = deputyForm.name;
@@ -18,7 +13,7 @@ let oligarchName = oligarchForm.name;
 let oligarchSurname = oligarchForm.surname;
 let oligarchAges = oligarchForm.ages;
 let oligarchMoney = oligarchForm.money;
-let oligarchAddOligarch = oligarchForm.moaddOligarchney;
+let oligarchAddOligarch = oligarchForm.addOligarch;
 
 //дістаємо третю форму з поліцейськими
 let polismanForm = document.forms.polisman;
@@ -71,7 +66,7 @@ function addLawInBlock(newLaw) {
 //events list
 // додаємо депутатів при кліку на кнопку
 deputyAddDeputy.onclick = function () {
-   if (deputyName.value && deputySurname.value && deputyAges.value && deputyDesk.value || true) {
+   if (deputyName.value && deputySurname.value && deputyAges.value && deputyDesk.value) {
       addDeputyInCouncil(deputyName.value, deputySurname.value, deputyAges.value, deputyDesk.value)
       let deputyBlock = document.getElementById("deputyBlock");
       let deputyElement = document.createElement("div");
@@ -245,4 +240,92 @@ deputyAddDeputy.onclick = function () {
    }
 }
 
-// abouVoiting.innerText
+oligarchAddOligarch.onclick = function () {
+   if (oligarchName.value && oligarchSurname.value && oligarchAges.value && oligarchMoney.value || true) {
+      let olig = new Oligarch(oligarchName.value, oligarchSurname.value, oligarchAges.value, oligarchMoney.value);
+      masOligarch.push(olig);
+
+      let oligarchBlockOne = document.getElementById("oligarchBlock");
+      let oligarchBlock = document.createElement("div");
+
+      let oligarchImgList = document.createElement("div");
+      let oligarchGiveBribBLock = document.createElement("form");
+
+      let img = document.createElement("img");
+      let inputBlock = document.createElement("div");
+      let OligarchName = document.createElement("spam");
+      let OligarchSurname = document.createElement("spam");
+      let OligarchAge = document.createElement("spam");
+      let OligarchBtn = document.createElement("spam");
+      let inpLaw = document.createElement("input");
+      let inpDeputy = document.createElement("input");
+      let inpVoice = document.createElement("input");
+      let inpSumBreabe = document.createElement("input");
+      let inpBtnGiveBreabe = document.createElement("button");
+
+      oligarchBlock.classList.add("oligarch")
+      img.classList.add("imgDeputy");
+      oligarchImgList.classList.add("deputyH");
+      inputBlock.classList.add("bclockBtn");
+      OligarchName.classList.add("btn");
+      OligarchSurname.classList.add("btn");
+      OligarchAge.classList.add("btn");
+      OligarchBtn.classList.add("btn");
+      inpSumBreabe.type = "number";
+      inpBtnGiveBreabe.style.width = "100px";
+      inpBtnGiveBreabe.style.height = "30px";
+      inpBtnGiveBreabe.style.height = "30px";
+      inpBtnGiveBreabe.style.marginLeft = "69px";
+      inpBtnGiveBreabe.style.backgroundColor = "green";
+
+
+      oligarchBlockOne.appendChild(oligarchBlock);
+      oligarchBlock.appendChild(oligarchImgList);
+      oligarchBlock.appendChild(oligarchGiveBribBLock);
+      oligarchImgList.appendChild(img);
+      oligarchImgList.appendChild(inputBlock);
+      inputBlock.appendChild(OligarchName);
+      inputBlock.appendChild(OligarchSurname);
+      inputBlock.appendChild(OligarchAge);
+      inputBlock.appendChild(OligarchBtn);
+      oligarchGiveBribBLock.appendChild(inpLaw);
+      oligarchGiveBribBLock.appendChild(inpDeputy);
+      oligarchGiveBribBLock.appendChild(inpVoice);
+      oligarchGiveBribBLock.appendChild(inpSumBreabe);
+      oligarchGiveBribBLock.appendChild(inpBtnGiveBreabe);
+
+      img.src = "img/5766011.png";
+      OligarchName.innerText = oligarchName.value;
+      OligarchSurname.innerText = oligarchSurname.value
+      OligarchAge.innerText = oligarchAges.value
+      OligarchBtn.innerText = oligarchMoney.value
+      inpLaw.placeholder = "Law";
+      inpDeputy.placeholder = "Deputy";
+      inpVoice.placeholder = "true or false";
+      inpSumBreabe.placeholder = "bribe";
+      inpBtnGiveBreabe.innerText = "Give";
+
+      inpBtnGiveBreabe.onclick = function (event) {
+         event.preventDefault();
+         let flag = null;
+         if (inpVoice.value == "true") {
+            flag = true;
+         } else if (inpVoice.value == "false") {
+            flag = false;
+         }
+         let obj = event.target.parentElement.previousElementSibling.children[1].children[0].innerText;
+         masOligarch.forEach(olig => {
+            if (olig.name === obj) {
+               council.forEach(deputy => {
+                  if (inpDeputy.value === deputy.name) {
+                     console.log(flag);
+                     olig.giveBrive(+inpSumBreabe.value, deputy, inpLaw.value, flag);
+                     OligarchBtn.innerText = Number(OligarchBtn.innerText) - Number(inpSumBreabe.value);
+                  }
+               });
+            }
+         });
+         voitingAdd();
+      }
+   }
+}
