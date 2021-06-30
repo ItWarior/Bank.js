@@ -1,24 +1,31 @@
-body{
+body {
    margin: 0;
    box-sizing: border-box;
 }
-#lawList{
+#lawList {
    display: flex;
    flex-wrap: wrap;
 }
-.blockLaw{
+.blockLaw {
    width: 200px;
    border: 3px solid green;
    background-color: #e6d0c8;
 }
-#deputyBlock{
+#deputyBlock {
    display: flex;
    flex-wrap: wrap;
 }
-.deputyH{
+.policeFunk {
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+}
+.deputyH,
+.policehad {
    margin: 0;
 }
-.deputy{
+.deputy,
+.police {
    margin: 20px;
    padding: 10px;
    border-radius: 5%;
@@ -27,11 +34,11 @@ body{
    height: 250px;
    background-color: rgb(152, 97, 168);
 }
-#oligarchBlock{
+#oligarchBlock {
    display: flex;
    flex-wrap: wrap;
 }
-.oligarch{
+.oligarch {
    margin: 20px;
    padding: 10px;
    border-radius: 5%;
@@ -40,23 +47,50 @@ body{
    height: 250px;
    background-color: rgb(228, 122, 80);
 }
-.imgDeputy{
+.imgDeputy {
    width: 100px;
    height: 100px;
    border: 2px solid black;
    padding: 3px;
 }
-.bclockBtn{
+.bclockBtn,
+.policeList {
    display: flex;
-    float: right;
-    flex-direction: column;
-    width: 120px;
+   float: right;
+   flex-direction: column;
+   width: 120px;
 }
-.btn{
+.btn,
+.list {
    margin: 5px;
    width: 100px;
    height: 20px;
 }
-.lawFormInp{
+.inpPolis {
+   width: 70px;
+   height: 26px;
+   background-color: #f3e308;
+   margin-top: 5px;
+}
+.catchBtn{
+   width: 70px;
+   height: 26px;
+   background-color: #f30814;
+   margin-left: 25px;
+}
+.inpBlock {
+   display: flex;
+   margin-top: 25px;
+}
+.lawFormInp {
    margin: 2px;
+}
+.policeblock {
+   margin: 20px;
+   padding: 10px;
+   border-radius: 5%;
+   border: 2px solid black;
+   width: 250px;
+   height: 250px;
+   background-color: rgb(41, 50, 129);
 }

@@ -23,11 +23,16 @@ class Oligarch extends Humen {
    giveBrive(sum, deputy, law, status) {
       this.money = this.money - sum;
       deputy.getBribe(sum);
-      if (sum > 100) {
-         deputy.voiting(law, status);
+      if (this.money > 0 && deputy.status != "prisoner") {
+         if (sum > 100) {
+            deputy.voiting(law, status);
+         } else {
+            console.log("Треба більше грошей");
+         }
       } else {
-         "Треба більше грошей"
+         console.log("Ви на мілі");
       }
+
    }
 }
 class Polisman extends Humen {

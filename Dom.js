@@ -241,7 +241,7 @@ deputyAddDeputy.onclick = function () {
 }
 
 oligarchAddOligarch.onclick = function () {
-   if (oligarchName.value && oligarchSurname.value && oligarchAges.value && oligarchMoney.value || true) {
+   if (oligarchName.value && oligarchSurname.value && oligarchAges.value && oligarchMoney.value) {
       let olig = new Oligarch(oligarchName.value, oligarchSurname.value, oligarchAges.value, oligarchMoney.value);
       masOligarch.push(olig);
 
@@ -318,14 +318,107 @@ oligarchAddOligarch.onclick = function () {
             if (olig.name === obj) {
                council.forEach(deputy => {
                   if (inpDeputy.value === deputy.name) {
-                     console.log(flag);
-                     olig.giveBrive(+inpSumBreabe.value, deputy, inpLaw.value, flag);
-                     OligarchBtn.innerText = Number(OligarchBtn.innerText) - Number(inpSumBreabe.value);
+                     if (deputy.status!="prisoner") {                        
+                        olig.giveBrive(+inpSumBreabe.value, deputy, inpLaw.value, flag);
+                        OligarchBtn.innerText = Number(OligarchBtn.innerText) - Number(inpSumBreabe.value);
+                     }
                   }
                });
             }
          });
          voitingAdd();
       }
+   }
+}
+
+polismanAddPoliceman.onclick = function (ev) {
+   deleteChild(police);  
+   let objPolisman = new Polisman(polismanName.value, polismanSurname.value, polismanAges.value);
+   let polices = document.getElementById("police");
+   let policeBlock = document.createElement("div");
+
+   let imgListblock = document.createElement("div");
+   let funcBLock = document.createElement("div");
+
+   let img = document.createElement("img");
+   let blockSpam = document.createElement("div");
+
+   let spamName = document.createElement("spam");
+   let spamSurname = document.createElement("spam");
+   let spamAge = document.createElement("spam");
+
+   let inpBlock = document.createElement("div");
+   let status = document.createElement("h3");
+
+   let inp = document.createElement("input");
+   let btn = document.createElement("button");
+
+   polices.appendChild(policeBlock);
+   policeBlock.appendChild(imgListblock);
+   policeBlock.appendChild(funcBLock);
+   imgListblock.appendChild(img);
+   imgListblock.appendChild(blockSpam);
+   blockSpam.appendChild(spamName);
+   blockSpam.appendChild(spamSurname);
+   blockSpam.appendChild(spamAge);
+   funcBLock.appendChild(inpBlock);
+   funcBLock.appendChild(status);
+   inpBlock.appendChild(inp);
+   inpBlock.appendChild(btn);
+
+   polices.classList.add("policeblock");
+   img.classList.add("imgDeputy");
+   imgListblock.classList.add("policehad");
+   funcBLock.classList.add("policeFunk");
+   blockSpam.classList.add("policeList");
+   spamName.classList.add("list");
+   spamSurname.classList.add("list");
+   spamAge.classList.add("list");
+   inpBlock.classList.add("inpBlock");
+   inp.classList.add("list");
+   btn.classList.add("inpPolis");
+
+   img.src = "img/1900822.png";
+   spamName.innerText = polismanName.value;
+   spamSurname.innerText = polismanSurname.value;
+   spamAge.innerText = polismanAges.value;
+   inp.placeholder = "Name";
+   btn.innerText = "Get info";
+   status.innerText = "Status :";
+
+   btn.onclick = function (ev) {
+      council.forEach(element => {
+         if (inp.value == element.name) {
+            let flag = funcBLock.lastChild.innerText;
+            if (element.status === false) {
+               status.innerText = "Status : " + element.status + " " + element.bribeSum;
+               if (flag === "catch") {
+                  funcBLock.removeChild(funcBLock.lastChild);
+                  flag = null;
+               }
+            } else if (element.status === true) {
+               if (flag === "catch") {
+                  status.innerText = "Status : " + element.status + " " + element.bribeSum;
+               } else {
+                  status.innerText = "Status : " + element.status + " " + element.bribeSum;
+                  let cath = document.createElement("button");
+                  funcBLock.appendChild(cath);
+                  cath.classList.add("catchBtn");
+                  cath.innerText = "catch";
+                  cath.onclick = function () {
+                     objPolisman.catsh(element);
+                     let del = document.getElementById("deputyBlock");
+                     for (let i = 0; i < del.children.length; i++) {
+                        if (del.children[i].firstChild.innerText === element.name) {
+                           let obj = del.children[i].children[2];
+                           obj.src = "img/803335.png";
+                           }
+                     }
+                  }
+               }
+            }
+
+         }
+      });
    }
 }
