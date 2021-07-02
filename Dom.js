@@ -245,7 +245,7 @@ deputyAddDeputy.onclick = function () {
       } else {
          let flag = false;
          council.forEach(element => {
-            if (element.name === deputyName.value) {
+            if (element.name === deputyName.value && element.surname === deputySurname.value) {
                flag = true;
             }
          });
