@@ -142,8 +142,10 @@ function statusLaw(law) {
    }
 }
 //створення нового депутата, повертає обєкт дупутат
-function addDeputyInCouncil(name, surname, ages, desk) {
-   let deputy = new Deputy(name, surname, ages, desk);
-   council.push(deputy);
-   return deputy;
+function addDeputyInCouncil(name, surname, ages, desk) {   
+      let deputy = new Deputy(name, surname, ages, desk);
+      council.push(deputy);
+      console.log(deputy);
+      return deputy;
 }
+
