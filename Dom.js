@@ -430,6 +430,7 @@ polismanAddPoliceman.onclick = function (ev) {
                         if (del.children[i].firstChild.innerText === element.name) {
                            let obj = del.children[i].children[2];
                            obj.src = "img/803335.png";
+                           console.log("Вітаємо ви затримали злочинця");
                         }
                      }
                   }
